@@ -1,10 +1,20 @@
 import {View, Text} from 'react-native';
 import React from 'react';
+import CustomButton from '../../components/Button';
+import {logout} from '../auth/authfunc';
 
-const Dashboard = () => {
+const Dashboard = ({navigation}: any) => {
+  const signout = async () => {
+    try {
+      await logout();
+      return navigation.replace('authentication');
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <View>
-      <Text>Dashboard</Text>
+      <CustomButton text="logout" onPress={signout} />
     </View>
   );
 };

@@ -1,19 +1,47 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
+import {
+  Alert,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import AuthTextInput from '../../components/AuthTextInput';
 import CustomButton from '../../components/Button';
 import Gap from '../../components/Gap';
 import {AuthStackParamList} from '../../router/Auth';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {Icon} from '@rneui/themed';
+import {login} from './authfunc';
+import {CompositeScreenProps} from '@react-navigation/native';
+import {RootParamList} from '../../router/Index';
 
-type NavProps = NativeStackScreenProps<AuthStackParamList, 'login'>;
-
+type NavProps = CompositeScreenProps<
+  NativeStackScreenProps<AuthStackParamList, 'login'>,
+  NativeStackScreenProps<RootParamList>
+>;
 const Login = ({navigation}: NavProps) => {
   const authData = {
     email: '',
     password: '',
   };
+
+  const signIn = async () => {
+    try {
+      const status = await login(authData.email, authData.password);
+
+      if (status) {
+        navigation.replace('main');
+      }
+    } catch (error: any) {
+      console.log(error);
+
+      if (error.code === 'auth/invalid-credential') {
+        Alert.alert('Login failed', 'incorrect email/password');
+      }
+    }
+  };
+
   return (
     <View style={style.container}>
       <View style={style.titleContainer}>
@@ -33,7 +61,7 @@ const Login = ({navigation}: NavProps) => {
           onTextChange={text => (authData.password = text)}
         />
         <Gap height={20} />
-        <CustomButton text="Login" onPress={() => console.log(authData)} />
+        <CustomButton text="Login" onPress={() => signIn()} />
         <Gap height={40} />
         <Text>or login by</Text>
         <Icon name="logo-google" type="ionicon" color="#517fa4" size={40} />

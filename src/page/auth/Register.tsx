@@ -1,18 +1,51 @@
-import {View, Text, TouchableWithoutFeedback, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableWithoutFeedback,
+  StyleSheet,
+  Alert,
+} from 'react-native';
 import React from 'react';
 import AuthTextInput from '../../components/AuthTextInput';
 import Gap from '../../components/Gap';
 import CustomButton from '../../components/Button';
 import {AuthStackParamList} from '../../router/Auth';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {register} from './authfunc';
+import {CompositeScreenProps} from '@react-navigation/native';
+import {RootParamList} from '../../router/Index';
+import {MainStackParamList} from '../../router/Main';
 
-type NavProps = NativeStackScreenProps<AuthStackParamList, 'register'>;
+// type NavProps = NativeStackScreenProps<AuthStackParamList, 'register'>;
+type NavProps = CompositeScreenProps<
+  NativeStackScreenProps<AuthStackParamList, 'register'>,
+  NativeStackScreenProps<RootParamList>
+>;
 
 const Register = ({navigation}: NavProps) => {
   const authData = {
     email: '',
     password: '',
+    confPassword: '',
   };
+
+  const signup = async () => {
+    try {
+      const status = await register(
+        authData.email,
+        authData.password,
+        authData.confPassword,
+      );
+      if (status) {
+        console.log(status);
+
+        navigation.replace('main');
+      }
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
+
   return (
     <View style={style.container}>
       <View style={style.titleContainer}>
@@ -35,10 +68,10 @@ const Register = ({navigation}: NavProps) => {
           title="confirm password"
           placeHolder="Confirm Password"
           secret={true}
-          onTextChange={text => (authData.password = text)}
+          onTextChange={text => (authData.confPassword = text)}
         />
         <Gap height={20} />
-        <CustomButton text="Register" onPress={() => console.log(authData)} />
+        <CustomButton text="Register" onPress={() => signup()} />
         <Gap height={100} />
       </View>
     </View>
