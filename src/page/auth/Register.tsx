@@ -37,12 +37,10 @@ const Register = ({navigation}: NavProps) => {
         authData.confPassword,
       );
       if (status) {
-        console.log(status);
-
-        navigation.replace('main');
+        return navigation.replace('main');
       }
     } catch (error: any) {
-      console.log(error);
+      Alert.alert('Signup failed', error);
     }
   };
 

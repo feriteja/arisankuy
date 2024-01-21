@@ -14,7 +14,7 @@ const Dashboard = ({navigation}: any) => {
   };
   return (
     <View>
-      <CustomButton text="logout" onPress={signout} />
+      <Text>Haloo</Text>
     </View>
   );
 };

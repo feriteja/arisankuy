@@ -23,7 +23,8 @@ const register = async (
       throw 'That email address is invalid!';
     }
 
-    throw error;
+    console.log(error);
+    throw 'Something wrong';
   }
 };
 
@@ -35,6 +36,7 @@ const login = async (email: string, password: string) => {
     );
     return authentication;
   } catch (error) {
+    console.log(error);
     throw error;
   }
 };

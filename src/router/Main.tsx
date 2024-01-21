@@ -1,18 +1,69 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import Dashboard from '../page/main/Dashboard';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import SearchGroup from '../page/main/SearchGroup';
+import Profile from '../page/main/Profile';
+import {Icon} from '@rneui/themed';
 
 export type MainStackParamList = {
   dashboard: undefined;
+  searchGroup: undefined;
+  profile: undefined;
 };
 
-const Stack = createNativeStackNavigator<MainStackParamList>();
+const Tab = createBottomTabNavigator<MainStackParamList>();
 
 const Main = () => {
   return (
-    <Stack.Navigator screenOptions={{headerShown: true}}>
-      <Stack.Screen name="dashboard" component={Dashboard} />
-    </Stack.Navigator>
+    <Tab.Navigator
+      screenOptions={{headerShown: false, tabBarActiveTintColor: '#8A2BE2'}}>
+      <Tab.Screen
+        name="dashboard"
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({color, size}) => (
+            <Icon
+              name="home"
+              type="feather"
+              backgroundColor="transparent"
+              color={color}
+            />
+          ),
+        }}
+        component={Dashboard}
+      />
+      <Tab.Screen
+        name="searchGroup"
+        options={{
+          tabBarLabel: 'Search',
+          tabBarIcon: ({color, size}) => (
+            <Icon
+              name="search"
+              type="feather"
+              backgroundColor="transparent"
+              color={color}
+            />
+          ),
+        }}
+        component={SearchGroup}
+      />
+      <Tab.Screen
+        name="profile"
+        options={{
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({color, size}) => (
+            <Icon
+              name="user"
+              type="feather"
+              backgroundColor="transparent"
+              color={color}
+            />
+          ),
+        }}
+        component={Profile}
+      />
+    </Tab.Navigator>
   );
 };
 

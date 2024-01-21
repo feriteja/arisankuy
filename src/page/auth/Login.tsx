@@ -20,7 +20,7 @@ type NavProps = CompositeScreenProps<
   NativeStackScreenProps<AuthStackParamList, 'login'>,
   NativeStackScreenProps<RootParamList>
 >;
-const Login = ({navigation}: NavProps) => {
+const Login: React.FC<NavProps> = ({navigation}) => {
   const authData = {
     email: '',
     password: '',
@@ -31,11 +31,9 @@ const Login = ({navigation}: NavProps) => {
       const status = await login(authData.email, authData.password);
 
       if (status) {
-        navigation.replace('main');
+        return navigation.replace('main');
       }
     } catch (error: any) {
-      console.log(error);
-
       if (error.code === 'auth/invalid-credential') {
         Alert.alert('Login failed', 'incorrect email/password');
       }
