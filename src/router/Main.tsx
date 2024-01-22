@@ -1,9 +1,9 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import Dashboard from '../page/main/Dashboard';
+import Dashboard from '../page/main/Dashboard/Dashboard';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import SearchGroup from '../page/main/SearchGroup';
-import Profile from '../page/main/Profile';
+import SearchGroup from '../page/main/SearchGroup/SearchGroup';
+import Profile from '../page/main/Profile/Profile';
 import {Icon} from '@rneui/themed';
 
 export type MainStackParamList = {
@@ -17,7 +17,10 @@ const Tab = createBottomTabNavigator<MainStackParamList>();
 const Main = () => {
   return (
     <Tab.Navigator
-      screenOptions={{headerShown: false, tabBarActiveTintColor: '#8A2BE2'}}>
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: '#492E87',
+      }}>
       <Tab.Screen
         name="dashboard"
         options={{

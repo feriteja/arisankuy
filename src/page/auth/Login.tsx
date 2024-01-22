@@ -3,6 +3,7 @@ import {
   Alert,
   StyleSheet,
   Text,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
@@ -35,8 +36,9 @@ const Login: React.FC<NavProps> = ({navigation}) => {
       }
     } catch (error: any) {
       if (error.code === 'auth/invalid-credential') {
-        Alert.alert('Login failed', 'incorrect email/password');
+        Alert.alert('Login gagal', 'incorrect email/password');
       }
+      Alert.alert('Login gagal', error.message);
     }
   };
 
@@ -64,13 +66,12 @@ const Login: React.FC<NavProps> = ({navigation}) => {
         <Text>or login by</Text>
         <Icon name="logo-google" type="ionicon" color="#517fa4" size={40} />
         <Gap height={50} />
-        <TouchableWithoutFeedback
-          onPress={() => navigation.navigate('register')}>
+        <TouchableOpacity onPress={() => navigation.navigate('register')}>
           <Text>Register</Text>
-        </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback>
+        </TouchableOpacity>
+        <TouchableOpacity>
           <Text>Forgot Password ?</Text>
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
       </View>
     </View>
   );

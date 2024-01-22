@@ -40,7 +40,7 @@ const Register = ({navigation}: NavProps) => {
         return navigation.replace('main');
       }
     } catch (error: any) {
-      Alert.alert('Signup failed', error);
+      Alert.alert('Signup gagal', error.message);
     }
   };
 

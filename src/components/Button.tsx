@@ -1,11 +1,5 @@
-import {
-  Alert,
-  StyleSheet,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
 import React from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 type props = {
   onPress: () => void;
@@ -15,12 +9,11 @@ type props = {
 
 const Button = (props: props) => {
   return (
-    <TouchableWithoutFeedback onPress={props.onPress}>
-      <View
-        style={{backgroundColor: props.color || '#fff', ...styles.loginButton}}>
-        <Text style={styles.textStyle}>{props.text}</Text>
-      </View>
-    </TouchableWithoutFeedback>
+    <TouchableOpacity
+      style={{backgroundColor: props.color || '#fff', ...styles.loginButton}}
+      onPress={props.onPress}>
+      <Text style={styles.textStyle}>{props.text}</Text>
+    </TouchableOpacity>
   );
 };
 

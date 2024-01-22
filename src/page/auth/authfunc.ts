@@ -6,8 +6,13 @@ const register = async (
   confPassword: string,
 ) => {
   try {
+    if (!email || !password || !confPassword) {
+      console.log('masuk');
+
+      throw new Error('Mohon isi semua kolom');
+    }
     if (password !== confPassword) {
-      throw new Error("password doesn't match");
+      throw new Error('password tidak sama');
     }
     const authentication = await auth().createUserWithEmailAndPassword(
       email,
@@ -16,20 +21,22 @@ const register = async (
     return authentication;
   } catch (error: any) {
     if (error.code === 'auth/email-already-in-use') {
-      throw 'That email address is already in use!';
+      throw new Error('Alamat email telah dipakai!');
     }
 
     if (error.code === 'auth/invalid-email') {
-      throw 'That email address is invalid!';
+      throw new Error('Alamat email tidak valid!');
     }
 
-    console.log(error);
-    throw 'Something wrong';
+    throw error;
   }
 };
 
 const login = async (email: string, password: string) => {
   try {
+    if (!email || !password) {
+      throw new Error('Email/Password tidak boleh kosong');
+    }
     const authentication = await auth().signInWithEmailAndPassword(
       email,
       password,
