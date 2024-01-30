@@ -1,20 +1,21 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import Dashboard from '../page/main/Dashboard/Dashboard';
+import Dashboard from '../../../page/main/Dashboard/Dashboard';
+import DetailGroup from '../../../page/main/DetailGroup/DetailGroup';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import SearchGroup from '../page/main/SearchGroup/SearchGroup';
-import Profile from '../page/main/Profile/Profile';
 import {Icon} from '@rneui/themed';
+import SearchGroup from '../../../page/main/SearchGroup/SearchGroup';
+import Profile from '../../../page/main/Profile/Profile';
 
-export type MainStackParamList = {
-  dashboard: undefined;
+export type DashboardStackParamList = {
+  dashboardRoute: undefined;
   searchGroup: undefined;
   profile: undefined;
 };
 
-const Tab = createBottomTabNavigator<MainStackParamList>();
+const Tab = createBottomTabNavigator<DashboardStackParamList>();
 
-const Main = () => {
+const DashboardRoute = () => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -22,7 +23,7 @@ const Main = () => {
         tabBarActiveTintColor: '#492E87',
       }}>
       <Tab.Screen
-        name="dashboard"
+        name="dashboardRoute"
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({color, size}) => (
@@ -70,4 +71,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default DashboardRoute;

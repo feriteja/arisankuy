@@ -14,7 +14,7 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {register} from './authfunc';
 import {CompositeScreenProps} from '@react-navigation/native';
 import {RootParamList} from '../../router/Index';
-import {MainStackParamList} from '../../router/Main';
+import {MainStackParamList} from '../../router/Main/Main';
 
 // type NavProps = NativeStackScreenProps<AuthStackParamList, 'register'>;
 type NavProps = CompositeScreenProps<
@@ -22,7 +22,7 @@ type NavProps = CompositeScreenProps<
   NativeStackScreenProps<RootParamList>
 >;
 
-const Register = ({navigation}: NavProps) => {
+const Register: React.FC<NavProps> = ({navigation}) => {
   const authData = {
     email: '',
     password: '',
@@ -54,6 +54,7 @@ const Register = ({navigation}: NavProps) => {
         <AuthTextInput
           title="email"
           placeHolder="email"
+          keyboardType="email-address"
           onTextChange={text => (authData.email = text)}
         />
         <AuthTextInput

@@ -2,6 +2,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {Icon} from '@rneui/themed';
 import Badge from '../../../components/Badge';
+import {statusColor} from '../../../utils/constant';
 
 type props = {
   totalGroup: number;
@@ -26,11 +27,6 @@ const Summary = () => {
           {formattedNumberUS} | <Text style={{fontSize: 20}}>8 Group </Text>
         </Text>
       </View>
-      <View style={styles.containerStatus}>
-        <Badge numberColor="#f0f0f0" status="Persiapan" number={4} />
-        <Badge numberColor="#f0f0f0" status="Berlangsung" number={3} />
-        <Badge numberColor="#f0f0f0" status="Selesai" number={1} />
-      </View>
     </View>
   );
 };
@@ -39,11 +35,12 @@ export default Summary;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#8d32bb',
+    backgroundColor: statusColor.Berlangsung,
     elevation: 1,
-    marginHorizontal: 10,
-    marginVertical: 10,
-    borderRadius: 10,
+    // marginHorizontal: 10,
+    marginBottom: 10,
+    borderBottomStartRadius: 10,
+    borderBottomEndRadius: 10,
     padding: 10,
     gap: 10,
   },

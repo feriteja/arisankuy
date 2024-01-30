@@ -36,9 +36,9 @@ const Login: React.FC<NavProps> = ({navigation}) => {
       }
     } catch (error: any) {
       if (error.code === 'auth/invalid-credential') {
-        Alert.alert('Login gagal', 'incorrect email/password');
+        return Alert.alert('Login gagal', 'incorrect email/password');
       }
-      Alert.alert('Login gagal', error.message);
+      return Alert.alert('Login gagal', error.message);
     }
   };
 

@@ -20,6 +20,16 @@ const SearchBar = () => {
             onSubmitEditing={() => console.log('test')}
           />
         </View>
+        <Icon
+          style={{
+            ...styles.inputIcon,
+            paddingHorizontal: 5,
+            paddingVertical: 10,
+          }}
+          name="plus"
+          type="feather"
+          size={18}
+        />
       </View>
     </View>
   );

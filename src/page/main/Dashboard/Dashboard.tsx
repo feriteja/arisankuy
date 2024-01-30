@@ -1,13 +1,15 @@
 import React from 'react';
 import {ScrollView, StyleSheet} from 'react-native';
-import ListGroup from '../../../components/ListGroup';
+import ListGroup from './ListGroup';
 import Summary from './Summary';
 
-const Dashboard = ({navigation}: any) => {
+// type navProps = NativeStackScreenProps<DashBoardStackParamList, 'dashboard'>;
+
+const Dashboard: React.FC<any> = ({navigation}) => {
   return (
     <ScrollView style={styles.container}>
       <Summary />
-      <ListGroup />
+      <ListGroup navigation={navigation} />
     </ScrollView>
   );
 };

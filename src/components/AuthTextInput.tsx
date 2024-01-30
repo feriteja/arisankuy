@@ -1,4 +1,11 @@
-import {Alert, StyleSheet, Text, TextInput, View} from 'react-native';
+import {
+  Alert,
+  KeyboardTypeOptions,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 import React, {ReactNode, useState} from 'react';
 import {Icon} from '@rneui/themed';
 
@@ -10,6 +17,7 @@ type props = {
   title: string;
   children?: ReactNode;
   onTextChange: (string: string) => void;
+  keyboardType?: KeyboardTypeOptions;
 };
 
 const AuthTextInput = (props: props) => {
@@ -28,6 +36,7 @@ const AuthTextInput = (props: props) => {
         style={{flex: 1}}
         placeholder={props.placeHolder}
         secureTextEntry={isSecret}
+        keyboardType={props.keyboardType}
         onChangeText={text => onTextChange(text)}
       />
       {props.secret &&

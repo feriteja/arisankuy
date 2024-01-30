@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {Icon} from '@rneui/themed';
 import {statusColor} from '../utils/constant';
@@ -6,43 +6,49 @@ import {statusColor} from '../utils/constant';
 type props = {
   title: string;
   status: 'Persiapan' | 'Berlangsung' | 'Selesai';
+  onPress: () => void;
 };
 
 const CardList: React.FC<props> = props => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={() => props.onPress()}>
       <View
         style={{
-          position: 'absolute',
-          height: 15,
-          width: 15,
+          ...styles.colorIndicator,
           backgroundColor: statusColor[props.status] || '#37B5B6',
-          borderRadius: 100,
-          top: 10,
-          left: 10,
         }}
       />
       <View style={styles.titleContainer}>
+        <Text>by: Renata Ayu</Text>
         <Text
+          numberOfLines={2}
+          lineBreakMode="tail"
           style={{
             fontSize: 16,
             fontWeight: '700',
+            color: '#000',
           }}>
-          {props.title || 'Title title title title title'}
+          {props.title || 'Title title title title title titletitletitle'}
         </Text>
-        <View style={{position: 'absolute', bottom: 5}}>
-          <Text>{props.status || 'Persiapan'}</Text>
-        </View>
       </View>
       <View style={styles.infoContainer}>
         <Text>Rp.4000.000</Text>
-        <Text numberOfLines={2}>8 Bulan</Text>
+        <Text numberOfLines={2} style={{fontWeight: '600'}}>
+          8 Bulan
+        </Text>
       </View>
       <View style={styles.groupCount}>
-        <Icon name="users" type="feather" />
-        <Text style={{fontSize: 20}}>47/60</Text>
+        <View style={{flexDirection: 'row', gap: 5, alignItems: 'center'}}>
+          <Icon name="users" type="feather" size={16} />
+          <Text style={{fontSize: 15}}>47/60</Text>
+        </View>
+        <View style={{}}>
+          <Text numberOfLines={1} adjustsFontSizeToFit>
+            {props.status || 'Persiapan'}
+          </Text>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -50,27 +56,37 @@ export default CardList;
 
 const styles = StyleSheet.create({
   container: {
-    height: 80,
+    // height: 80,
     elevation: 1,
     backgroundColor: '#fff',
-    borderRadius: 20,
-    marginHorizontal: 10,
+    borderRadius: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 10,
+    paddingHorizontal: 15,
     gap: 4,
+    overflow: 'hidden',
   },
   groupCount: {
     alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    gap: 5,
+    justifyContent: 'flex-end',
+    paddingVertical: 10,
   },
   titleContainer: {
-    justifyContent: 'center',
+    maxWidth: 200,
+    paddingVertical: 10,
+    paddingHorizontal: 2,
   },
   infoContainer: {
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     flexWrap: 'wrap',
+    paddingVertical: 10,
+    paddingHorizontal: 5,
+  },
+  colorIndicator: {
+    position: 'absolute',
+    height: '100%',
+    width: 10,
+    opacity: 0.7,
+    borderRadius: 100,
   },
 });

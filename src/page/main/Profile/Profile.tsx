@@ -5,15 +5,22 @@ import {logout} from '../../auth/authfunc';
 import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootParamList} from '../../../router/Index';
-import {MainStackParamList} from '../../../router/Main';
+import {MainStackParamList} from '../../../router/Main/Main';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {Icon} from '@rneui/themed';
 import {StarRating} from '../../../components/StarRating';
 import Gap from '../../../components/Gap';
+import SelfInfo from './SelfInfo';
+import TrackStatus from './TrackStatus';
+import {DashboardStackParamList} from '../../../router/Main/Dashboard/DashboardRoute';
+import {StackScreenProps} from '@react-navigation/stack';
 
 type NavProps = CompositeScreenProps<
-  BottomTabScreenProps<MainStackParamList, 'profile'>,
-  NativeStackScreenProps<RootParamList>
+  BottomTabScreenProps<DashboardStackParamList, 'profile'>,
+  CompositeScreenProps<
+    StackScreenProps<MainStackParamList>,
+    StackScreenProps<RootParamList>
+  >
 >;
 
 const Profile: React.FC<NavProps> = ({navigation}) => {
@@ -31,34 +38,10 @@ const Profile: React.FC<NavProps> = ({navigation}) => {
         <Icon style={styles.backIcon} name="arrow-left" type="feather" />
         <Text style={styles.barText}>Akun Saya</Text>
       </View>
-      <View style={styles.userInfoContainer}>
-        <Image
-          source={require('../../../assets/image/avatar_dummy.png')}
-          style={styles.avatarImg}
-        />
-        <View style={styles.userInfoContent}>
-          <Text style={styles.userInfoName}>Anisa Permata Sari</Text>
-          <Text style={styles.infoText}>081xxxxxxxx</Text>
-          <Text style={styles.infoText}>anixxx@email.com</Text>
-        </View>
-        <View></View>
-      </View>
-      <View style={styles.ratingContainer}>
-        <Text style={styles.ratingText}>Rating ku</Text>
-
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
-          <StarRating rating={4} />
-          <View style={styles.ratingValue}>
-            <Text style={{fontSize: 18, fontWeight: '700'}}>4.5/5</Text>
-            <Text>12 Group</Text>
-          </View>
-        </View>
-      </View>
+      <SelfInfo />
+      <Gap height={20} />
+      <Text style={styles.textTitle}>Track Status</Text>
+      <TrackStatus />
       <Gap style={{flex: 1}} />
       <View>
         <CustomButton onPress={signout} text="SignOut" />
@@ -79,27 +62,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   topBar: {flexDirection: 'row', alignItems: 'center'},
-  userInfoContainer: {
-    marginTop: 20,
-    flexDirection: 'row',
-    paddingHorizontal: 10,
-  },
-  avatarImg: {
-    height: 70,
-    width: 70,
-    borderRadius: 80,
-  },
-  userInfoName: {
-    fontSize: 17,
-    fontWeight: '600',
-    color: '#000',
-  },
-  userInfoContent: {
-    marginLeft: 10,
-  },
-  infoText: {
-    color: '#000',
-  },
+
   ratingContainer: {
     elevation: 1,
     backgroundColor: '#fff',
@@ -114,4 +77,11 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   ratingValue: {alignItems: 'center'},
+  textTitle: {
+    marginHorizontal: 10,
+    color: '#000',
+    fontSize: 20,
+    fontWeight: '600',
+    marginVertical: 5,
+  },
 });
